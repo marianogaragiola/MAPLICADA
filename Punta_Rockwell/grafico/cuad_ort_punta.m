@@ -39,7 +39,7 @@ N = size(X,1) ;  % devuelve la cantidad de filas, que deberia ser la cantidad de
 
 %esto va de prueba
 %zce = Z2umbral - (R+R2)*sin(alpha);
-%theta_umbral = acos((Z2umbral-zce)/sqrt((R+R2)^2*cos(alpha)^2+(Z2umbral-zce)^2))
+%theta_umbral = acos((Z2umbral-zce)/sqrt((R+R2)^2*cos(alpha)^2+(Z2umbral-zce)^2));
 
 %theta_umbral2 = asin((R+R2)/(2.*sqrt((R+R2)^2*cos(alpha)^2+Z2umbral^2)))
 %theta_umbral3 = acos(Z2umbral/sqrt((R+R2)^2*cos(alpha)^2+Z2umbral^2))

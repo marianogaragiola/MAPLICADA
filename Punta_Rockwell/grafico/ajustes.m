@@ -117,13 +117,13 @@ Max = 4*sigma_med;
 figure; hold on;
 set(gca, 'linewidth', 4, 'fontsize', 20); % grosor de la lineas de los ejes y el tamaño de la letra
 set(gca,'ticklength', 2.5*get(gca,'ticklength')) %largo de los ticksmarks
-xlim([0 0.51]);
+xlim([0 2]);
 graphics_toolkit gnuplot
-xlabel('\theta/\pi','fontsize',20);
+xlabel('\theta/\theta_u','fontsize',20);
 ylabel('distancias','fontsize',20);
 h = colorbar;
 set(gca, 'clim', [Min, Max]);
-scatter(dist(:,2)/pi,dist(:,6),10,c,'filled'); colorbar('ytick', [0,sigma_med, 2*sigma_med, 3*sigma_med, 4*sigma_med],...
+scatter(dist(:,2)/theta_umbral,dist(:,6),10,c,'filled'); colorbar('ytick', [0,sigma_med, 2*sigma_med, 3*sigma_med, 4*sigma_med],...
                                                         'yticklabel', {'0', '\sigma', '2\sigma', '3\sigma', '4\sigma'})
 
 print -depsc distancia_vs_theta.eps
@@ -135,21 +135,22 @@ set(gca,'ticklength', 2.5*get(gca,'ticklength')) %largo de los ticksmarks
 graphics_toolkit gnuplot
 xlim([-0.2 2.2]);
 xlabel('\phi/\pi','fontsize',20);
-ylim([-0.05 0.55]);
-ylabel('\theta/\pi','fontsize',20);
-scatter(dist(:,1)/pi,dist(:,2)/pi,10,c,'filled');  colorbar('ytick', [0,sigma_med, 2*sigma_med, 3*sigma_med, 4*sigma_med],...
+ylim([-0.05 2]);
+ylabel('\theta/\theta_u','fontsize',20);
+scatter(dist(:,1)/pi,dist(:,2)/theta_umbral,10,c,'filled');  colorbar('ytick', [0,sigma_med, 2*sigma_med, 3*sigma_med, 4*sigma_med],...
                                                         'yticklabel', {'0', '\sigma', '2\sigma', '3\sigma', '4\sigma'});
 print -depsc distancia_vs_theta_phi.eps
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 figure; hold on;
+set(get(gca,'ylabel'),'rotation',0)
 set(gca, 'linewidth', 4, 'fontsize', 20); % grosor de la lineas de los ejes y el tamaño de la letra
 set(gca,'ticklength', 2.5*get(gca,'ticklength')) %largo de los ticksmarks
 graphics_toolkit gnuplot
 xlabel('\phi/\pi','fontsize',20);
 xlim([-0.2 2.2]);
-ylabel('\theta/\pi','fontsize',20);
-ylim([-0.05 0.55]);
-scatter(dist(:,1)/pi,dist(:,2)/pi,10,dist(:,6),'filled'); colorbar;
+ylabel('\theta/\theta_u','fontsize',20);
+ylim([-0.05 2]);
+scatter(dist(:,1)/pi,dist(:,2)/theta_umbral,10,dist(:,6),'filled'); colorbar;
 print -depsc distancia_vs_theta_phi2.eps
 
 
