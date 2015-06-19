@@ -1,3 +1,12 @@
+% -------------------------------------------------------------------------------%
+% Este codigo toma varios valores de sigma (desviacion estandar en los datos     %
+% simulados) y va haciendo la minimizacion por cudrados minimos. Para cada valor %
+% de sigma, genera N conjuntos de puntos simulados y calcula los parametros de   %
+% optimizacion R, theta y phi. Luego con los N valores de cada parametro calcula %
+% la desviacion estandar y promedio de cada parametro para despues grabarlo en   %
+% un archivo .dat.                                                               %
+%--------------------------------------------------------------------------------%
+
 clear all; close all;
 
 L = 0.4; % en mm
@@ -16,14 +25,14 @@ radio = [];
 angulo = [];
 theta = [];
 
-titulo = '# sigma R error_R phi error_phi theta error_theta';
-save( 'errores3.dat', 'titulo')
+titulo = '# sigma R error_R error_relativo_R phi error_phi error_relativo_phi theta error_theta error_relativo_theta';
+save( 'errores4.dat', 'titulo')
 
 
 
 for sigma = vec_sigma
 
-  for i = 1: 50
+  for i = 1: 100
 
     [r, rsim] = punta3(L, R, R2, alpha, sigma, NUM_PUNTOS);
 
@@ -38,28 +47,25 @@ for sigma = vec_sigma
   % ang_medio = [ ang_medio; mean(angulo) std(angulo)] ;
   % theta_medio = [ theta_medio; mean(theta) std(theta)] ;
 
-  r_medio = [mean(radio) std(radio)] ;
-  ang_medio = [mean(angulo) std(angulo)] ;
-  theta_medio = [mean(theta) std(theta)] ;
+  r_medio = [mean(radio) std(radio) std(radio)/mean(radio)] ;
+  ang_medio = [mean(angulo) std(angulo) std(angulo)/mean(angulo)] ;
+  theta_medio = [mean(theta) std(theta) std(theta)/mean(theta)] ;
 
   % aca hago el ajuste con los datos medidos por clemar
 
-  filename='Datos_XYZ_Punta_SN_5620-R2=025mm.TXT';
+  % filename='Datos_XYZ_Punta_SN_5620-R2=025mm.TXT';
+  %
+  % rmed = load(filename, '-ascii');
 
-  rmed = load(filename, '-ascii');
+  % [popt, d, dist] = cuad_ort_punta(L, R, R2, alpha, sigma, rmed);
 
-  [popt, d, dist] = cuad_ort_punta(L, R, R2, alpha, sigma, rmed);
+  % dist = [distesf(popt, X(I,:)); distcono(popt, X(~I,:)) ];
 
-  %dist = [distesf(popt, X(I,:)); distcono(popt, X(~I,:)) ];
+  % r_medido = [popt(6) std(radio)] ;
+  % angulo_medido = [popt(7) std(angulo)] ;
+  % theta_medido = [popt(1) std(theta)] ;
 
-  r_medido = [popt(6) std(radio)] ;
-  angulo_medido = [popt(7) std(angulo)] ;
-  theta_medido = [popt(1) std(theta)] ;
-
-  %vec_salida = [sigma r_medido angulo_medido theta_medido];
+  % vec_salida = [sigma r_medido angulo_medido theta_medido];
   vec_salida = [sigma r_medio ang_medio theta_medio];
-  save('-append', '-ascii', 'errores3.dat', 'vec_salida' )
+  save('-append', '-ascii', 'errores4.dat', 'vec_salida' )
 end
-%mean(dist)
-%figure
-%plot(dist(:),'.')

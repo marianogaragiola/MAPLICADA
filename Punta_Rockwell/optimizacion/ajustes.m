@@ -16,8 +16,8 @@ radio = [];
 angulo = [];
 theta = [];
 
-titulo = '# 1/N R error_R phi error_phi theta error_theta';
-save( 'estabilizacion.dat', 'titulo')
+titulo = '# sigma   1/N   R   error_R   phi   error_phi   theta   error_theta';
+save( 'estabilizacion-2.dat', 'titulo')
 
 for N = vec_N
 
@@ -56,7 +56,7 @@ for N = vec_N
 
   %vec_salida = [sigma r_medido angulo_medido theta_medido];
   vec_salida = [sigma 1./N r_medio ang_medio theta_medio];
-  save('-append', '-ascii', 'estabilizacion.dat', 'vec_salida' )
+  save('-append', '-ascii', 'estabilizacion-2.dat', 'vec_salida' )
 end
 %mean(dist)
 %figure
