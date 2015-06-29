@@ -96,11 +96,7 @@ for i = 1: 9
 
 end
 
-%rotar la figura
-psi=15*pi/(180*60); sigma*randn(1,1);
-rota=rotv([0,1,0],psi);
-r=r*rota;
-rmed=rmed*rota;
+
 
 %plot3(r(:,1), r(:,2), r(:,3), '.', rmed(:,1), rmed(:,2), rmed(:,3), '.');
 %save("-ascii","r.mat","r");
