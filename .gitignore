@@ -1,2 +1,8 @@
 *.pdf
-results/
+*.eps
+*.png
+*.ps
+*.dat
+*.xls
+Curse_100_APTI/*
+Curse_737_APTI/*
