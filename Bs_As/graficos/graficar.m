@@ -1,6 +1,9 @@
 clear all;
 close all;
 
+%%%% Leo los datos para hacer los graficos.
+% Hay que tener cuidado con el directorio. Hay que poner el directorio
+% donde se encuentra el archivo datos_para_graficar-3.dat.
 z = load('./Datos/datos_para_graficar-3.dat', '-ascii');
 
 %%%% Lo que sigue aca es para hacer un grafico de barras 3D
