@@ -13,10 +13,7 @@ dias = dias(:);
 % z2 es una matriz que tiene en cada columna las mediciones de la estacion
 % elegida a lo largo de cada dia. Es decir, tiene 24 filas y num_dias columnas
 % El elemento (i,j) es la medicion del dia j en la hora i.
-z2 = [ ];
-for i = 1:num_dias
-  z2 = [z2, z((i-1)*24+1:i*24,estacion)];
-end
+z2 = reshape(z(:,estacion), 24, length(z(:,estacion))/24);
 
 % z3 es un vector donde cada elemento es el promedio de cada columna de z2.
 z3 = mean(z2);

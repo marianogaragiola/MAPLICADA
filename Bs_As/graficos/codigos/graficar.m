@@ -12,32 +12,32 @@ z = load('../Datos/datos_para_graficar-3.dat', '-ascii');
 % estacion = 2 ---> indica estacion Cordoba.
 % estacion = 3 ---> indica estacion La Boca.
 
-%estacion = 3; % Elijo la estacion que queremos graficar.
+estacion = 1; % Elijo la estacion que queremos graficar.
 
-%h = grafico_barras_3d(estacion, z);
+h = grafico_barras_3d(estacion, z);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%% Aca hago el grafico para una misma hora en funcion del dia.
 
-%hora = 23; % Elijo la hora a la que quiero graficar
-%estacion = 3; % Elijo la estacion que queremos graficar.
-
-%h = grafico_hora(hora, estacion, z);
+% hora = 23; % Elijo la hora a la que quiero graficar
+% estacion = 3; % Elijo la estacion que queremos graficar.
+%
+% h = grafico_hora(hora, estacion, z);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%% Aca hago un grafico en el que primero hago el promedio de la concentracion
 %%%% por dia y luego grafico el promedio por dia vs el dia.
 
-%estacion = 3; % Elijo la estacion que queremos graficar.
+% estacion = 3; % Elijo la estacion que queremos graficar.
 
-%h = grafico_promedio(estacion, z);
+% h = grafico_promedio(estacion, z);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%% Aca hago el grafico de la concentracion minima y maxima de cada dia
 %%%% en funcion del dia.
-estacion = 3;
+% estacion = 3;
 
-z3 = grafico_minmax(estacion, z);
+h = grafico_minmax(estacion, z);
