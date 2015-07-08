@@ -13,17 +13,19 @@ z = load('../Datos/datos_para_graficar-3.dat', '-ascii');
 % estacion = 3 ---> indica estacion La Boca.
 
 estacion = 3; % Elijo la estacion que queremos graficar.
+dia_i = '01-01-2012';
+dia_f = '01-01-2015';
 
-% h = grafico_barras_3d(estacion, z);
+h = grafico_barras_3d(estacion, dia_i, dia_f, z);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%% Aca hago el grafico para una misma hora en funcion del dia.
 
-% hora = 23; % Elijo la hora a la que quiero graficar
+hora = 23; % Elijo la hora a la que quiero graficar
 % estacion = 3; % Elijo la estacion que queremos graficar.
 %
-% h = grafico_hora(hora, estacion, z);
+h = grafico_hora(hora, dia_i, dia_f, estacion, z);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -32,7 +34,7 @@ estacion = 3; % Elijo la estacion que queremos graficar.
 
 % estacion = 3; % Elijo la estacion que queremos graficar.
 
-h = grafico_promedio(estacion, z);
+h = grafico_promedio(estacion, dia_i, dia_f, z);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -40,7 +42,6 @@ h = grafico_promedio(estacion, z);
 %%%% en funcion del dia.
 % estacion = 3;
 %%%% Elejimos los dias para hacer el grafico. Acordarse que el formato es 'mm-dd-yyyy'.
-dia_i = '01-01-2012';
-dia_f = '03-01-2015';
 
-% h = grafico_minmax(estacion, dia_i, dia_f, z);
+
+h = grafico_minmax(estacion, dia_i, dia_f, z);
