@@ -18,6 +18,7 @@ z2 = reshape(z(:,estacion), 24, length(z(:,estacion))/24);
 % z3 es un vector donde cada elemento es el promedio de cada columna de z2.
 z3 = mean(z2);
 
+
 % Ahora hago el grafico.
 z3 = [dias, z3(:)];
 figure;

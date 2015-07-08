@@ -55,12 +55,16 @@ xData2 = linspace(dia_inicial, dia_final, 5); % vector para poner las fechas en 
 in = find(~(dias-dia_inicial)); % me da el indice del vector donde tengo que empezar a graficar.
 fi = find(~(dias-dia_final));   % me da el indice del vector donde tengo que terminar de graficar.
 
+% I es un vector logico (con 0 y 1) donde el elemento i vale 1 si z2(i)/=0 y cero si z(i)=0
+% lo uso para graficar los puntos donde hay mediciones.
+I = logical(z3(in:fi,2));
+
 figure;
-h = plot(z3(in:fi,1), z3(in:fi,2), '.', z4(in:fi,1), z4(in:fi,2), '.' );
-title('Concentracion mínima y máxima por dia - Centenario','fontsize', 15)
+h = plot(z3(I,1), z3(I,2), '.', z4(I,1), z4(I,2), '.' );
+title('Concentracion mínima y máxima por dia - La Boca','fontsize', 15)
 legend('mínimo diario', 'máximo diario')
 xlim([z3(in,1) z3(fi,1)]);
-xlabel('dias', 'fontsize', 15);
+xlabel('dias [mm/aa]', 'fontsize', 15);
 ylabel('concentracion [ppm]', 'fontsize', 15);
 set(gca, 'linewidth', 2, 'fontsize', 15);
 set(gca,'ticklength', 2.5*get(gca,'ticklength'));
