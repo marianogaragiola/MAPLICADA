@@ -39,7 +39,7 @@ theta_medio = [ theta_medio; R2 mean(theta) std(theta)] ;
 
 % aca hago el ajuste con los datos medidos por clemar
 
-filename='Datos_XYZ_Punta_SN_5620-R2=025mm.TXT';
+filename='../entrada/Datos_XYZ_Punta_SN_5620-R2=025mm.TXT';
 
 rmed = load(filename, '-ascii');
 %rmed = rsim;
