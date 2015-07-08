@@ -36,7 +36,7 @@ fi = find(~(dias-dia_final));   % me da el indice del vector donde tengo que ter
 
 figure;
 h = bar3(horas, z2(:,in:fi)); % aca hago el grafico
-title('Concentracion por dias y horas - Centenario','fontsize', 15)
+title('Concentracion por dias y horas - La Boca','fontsize', 15)
 ylim([0 25]);
 ylabel('hora','fontsize',15);
 xlabel('dia','fontsize',15);

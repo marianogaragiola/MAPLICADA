@@ -37,7 +37,7 @@ I = logical(z2(in:fi,2));
 % hago el grafico.
 figure
 h = plot(z2(I,1), z2(I,2),'.');
-title('Concentracion CO a la hora ... - ', 'fontsize', 15)
+title('Concentracion CO a la hora 13hs - - La Boca', 'fontsize', 15)
 xlabel('dias', 'fontsize', 15);
 ylabel('concentracion [ppm]', 'fontsize', 15);
 set(gca,'ticklength', 2.5*get(gca,'ticklength'));

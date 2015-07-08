@@ -42,7 +42,7 @@ fi = find(~(dias-dia_final));   % me da el indice del vector donde tengo que ter
 % Ahora hago el grafico.
 figure;
 h = plot(z3(in:fi,1), z3(in:fi,2), '.');
-title('Concentración promedio por día', 'fontsize', 15);
+title('Concentración promedio por día - La Boca', 'fontsize', 15);
 xlabel('dias', 'fontsize', 15);
 xlim([z3(in,1) z3(fi,1)]);
 ylabel('concentracion [ppm]', 'fontsize', 15);
