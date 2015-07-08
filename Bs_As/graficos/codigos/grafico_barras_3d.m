@@ -33,6 +33,5 @@ title('Concentracion por dias y horas - Centenario','fontsize', 15)
 set(gca, 'XTick', dias);
 zlabel('concentracion CO [ppm]','fontsize',15);
 set(gca, 'fontsize', 15 );
-% print -depsc grafico.eps
 
 end
