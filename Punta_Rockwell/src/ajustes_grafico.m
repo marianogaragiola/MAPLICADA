@@ -72,7 +72,7 @@ dist = [phi_angulo_solido theta_angulo_solido dist];
 sigma_med = std(dist(:,6));
 %sigma_med
 
-save('-ascii', 'distancias.dat', 'dist');
+save('-ascii', '../salida/distancias_grafico.dat', 'dist');
 
 % en lo que sigue aca abajo sirve para hacer un terrible grafico
 % eligo tres regiones para los distintos colores
@@ -110,7 +110,7 @@ ylim([min(dist(:,3)) max(dist(:,3))]);
 ylabel('Y','fontsize',20);
 scatter(dist(:,3),dist(:,4),10,c,'filled'); colorbar('ytick', [0,sigma_med, 2*sigma_med, 3*sigma_med, 4*sigma_med],...
                                                         'yticklabel', {'0', '\sigma', '2\sigma', '3\sigma', '4\sigma'})
-print -depsc distancia_XY.eps
+print -depsc ../salida/distancia_XY.eps
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Min = 0.;
 Max = 4*sigma_med;
@@ -126,7 +126,7 @@ set(gca, 'clim', [Min, Max]);
 scatter(dist(:,2)/theta_umbral,dist(:,6),10,c,'filled'); colorbar('ytick', [0,sigma_med, 2*sigma_med, 3*sigma_med, 4*sigma_med],...
                                                         'yticklabel', {'0', '\sigma', '2\sigma', '3\sigma', '4\sigma'})
 
-print -depsc distancia_vs_theta.eps
+print -depsc ../salida/distancia_vs_theta.eps
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 figure; hold on;
 set(get(gca,'ylabel'),'rotation',0)
@@ -139,7 +139,7 @@ ylim([-0.05 2]);
 ylabel('\theta/\theta_u','fontsize',20);
 scatter(dist(:,1)/pi,dist(:,2)/theta_umbral,10,c,'filled');  colorbar('ytick', [0,sigma_med, 2*sigma_med, 3*sigma_med, 4*sigma_med],...
                                                         'yticklabel', {'0', '\sigma', '2\sigma', '3\sigma', '4\sigma'});
-print -depsc distancia_vs_theta_phi.eps
+print -depsc ../salida/distancia_vs_theta_phi.eps
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 figure; hold on;
 set(get(gca,'ylabel'),'rotation',0)
@@ -151,7 +151,7 @@ xlim([-0.2 2.2]);
 ylabel('\theta/\theta_u','fontsize',20);
 ylim([-0.05 2]);
 scatter(dist(:,1)/pi,dist(:,2)/theta_umbral,10,dist(:,6),'filled'); colorbar;
-print -depsc distancia_vs_theta_phi2.eps
+print -depsc ../salida/distancia_vs_theta_phi2.eps
 
 
 r_medido = [popt(6) std(radio)] ;
