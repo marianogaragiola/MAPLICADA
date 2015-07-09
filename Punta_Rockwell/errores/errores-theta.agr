@@ -84,7 +84,7 @@
 @timestamp rot 0
 @timestamp font 0
 @timestamp char size 1.000000
-@timestamp def "Sun Jun 28 18:53:11 2015"
+@timestamp def "Thu Jul  9 10:56:20 2015"
 @r0 off
 @link r0 to g0
 @r0 type above
@@ -205,7 +205,7 @@
 @    yaxis  bar color 1
 @    yaxis  bar linestyle 1
 @    yaxis  bar linewidth 2.5
-@    yaxis  label "R"
+@    yaxis  label "\xq"
 @    yaxis  label layout para
 @    yaxis  label place auto
 @    yaxis  label char size 1.000000
@@ -408,7 +408,7 @@
 @    yaxis  bar color 1
 @    yaxis  bar linestyle 1
 @    yaxis  bar linewidth 2.5
-@    yaxis  label "\xD\f{}R"
+@    yaxis  label "\xDq"
 @    yaxis  label layout para
 @    yaxis  label place auto
 @    yaxis  label char size 1.000000
@@ -611,7 +611,7 @@
 @    yaxis  bar color 1
 @    yaxis  bar linestyle 1
 @    yaxis  bar linewidth 2.5
-@    yaxis  label "\xD\f{}R/R"
+@    yaxis  label "\xDq/q"
 @    yaxis  label layout para
 @    yaxis  label place auto
 @    yaxis  label char size 1.000000
