@@ -17,7 +17,7 @@ angulo = [];
 theta = [];
 
 titulo = '# sigma   1/N   R   error_R   phi   error_phi   theta   error_theta';
-save( 'estabilizacion-2.dat', 'titulo')
+save( '../salida/estabilizacion-2.dat', 'titulo')
 
 for N = vec_N
 
@@ -42,7 +42,7 @@ for N = vec_N
 
   % aca hago el ajuste con los datos medidos por clemar
 
-  % filename='Datos_XYZ_Punta_SN_5620-R2=025mm.TXT';
+  % filename='../entrada/Datos_XYZ_Punta_SN_5620-R2=025mm.TXT';
   %
   % rmed = load(filename, '-ascii');
   %
@@ -56,7 +56,7 @@ for N = vec_N
 
   %vec_salida = [sigma r_medido angulo_medido theta_medido];
   vec_salida = [sigma 1./N r_medio ang_medio theta_medio];
-  save('-append', '-ascii', 'estabilizacion-2.dat', 'vec_salida' )
+  save('-append', '-ascii', '../salida/estabilizacion-2.dat', 'vec_salida' )
 end
 %mean(dist)
 %figure

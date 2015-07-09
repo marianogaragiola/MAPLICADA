@@ -26,7 +26,7 @@ angulo = [];
 theta = [];
 
 titulo = '# sigma R error_R error_relativo_R phi error_phi error_relativo_phi theta error_theta error_relativo_theta';
-save( 'errores5.dat', 'titulo')
+save( '../salida/errores5.dat', 'titulo')
 
 
 
@@ -53,7 +53,7 @@ for sigma = vec_sigma
 
   % aca hago el ajuste con los datos medidos por clemar
 
-  % filename='Datos_XYZ_Punta_SN_5620-R2=025mm.TXT';
+  % filename='../entrada/Datos_XYZ_Punta_SN_5620-R2=025mm.TXT';
   %
   % rmed = load(filename, '-ascii');
 
@@ -67,5 +67,5 @@ for sigma = vec_sigma
 
   % vec_salida = [sigma r_medido angulo_medido theta_medido];
   vec_salida = [sigma r_medio ang_medio theta_medio];
-  save('-append', '-ascii', 'errores5.dat', 'vec_salida' )
+  save('-append', '-ascii', '../salida/errores5.dat', 'vec_salida' )
 end
