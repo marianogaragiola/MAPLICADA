@@ -31,7 +31,7 @@ format long;
 %   resultado = [resultado; decimales popt(6) popt(7) popt(1)];
 %
 % end
-% save('redondeo.dat', '-ascii', 'resultado')
+% save('../salida/redondeo.dat', '-ascii', 'resultado')
 % figure
 % plot(resultado(:,1),resultado(:,2))
 % figure
@@ -79,4 +79,4 @@ for i = 1:7
   dev_std = [dev_std; resuldato(4*(i-1)+1:4*i)];
 end
 
-save('desviaciones_estandar-vs-num_decimales.dat', '-ascii', 'dev_std')
+save('../salida/desviaciones_estandar-vs-num_decimales.dat', '-ascii', 'dev_std')
