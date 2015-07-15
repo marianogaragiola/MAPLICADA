@@ -109,7 +109,7 @@ xlabel('X','fontsize',20);
 ylim([min(dist(:,3)) max(dist(:,3))]);
 ylabel('Y','fontsize',20);
 scatter(dist(:,3),dist(:,4),10,c,'filled'); colorbar('ytick', [0,sigma_med, 2*sigma_med, 3*sigma_med, 4*sigma_med],...
-                                                        'yticklabel', {'0', '\sigma', '2\sigma', '3\sigma', '4\sigma'})
+                                                        'yticklabel', {'0', '\sigma', '2\sigma', '3\sigma', '4\sigma'}, "interpreter", "tex")
 print -depsc distancia_XY.eps
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Min = 0.;
@@ -124,7 +124,7 @@ ylabel('distancias','fontsize',20);
 h = colorbar;
 set(gca, 'clim', [Min, Max]);
 scatter(dist(:,2)/theta_umbral,dist(:,6),10,c,'filled'); colorbar('ytick', [0,sigma_med, 2*sigma_med, 3*sigma_med, 4*sigma_med],...
-                                                        'yticklabel', {'0', '\sigma', '2\sigma', '3\sigma', '4\sigma'})
+                                                        'yticklabel', {'0', '\sigma', '2\sigma', '3\sigma', '4\sigma'}, "interpreter", "tex")
 
 print -depsc distancia_vs_theta.eps
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -138,7 +138,7 @@ xlabel('\phi/\pi','fontsize',20);
 ylim([-0.05 2]);
 ylabel('\theta/\theta_u','fontsize',20);
 scatter(dist(:,1)/pi,dist(:,2)/theta_umbral,10,c,'filled');  colorbar('ytick', [0,sigma_med, 2*sigma_med, 3*sigma_med, 4*sigma_med],...
-                                                        'yticklabel', {'0', '\sigma', '2\sigma', '3\sigma', '4\sigma'});
+                                                        'yticklabel', {'0', '\sigma', '2\sigma', '3\sigma', '4\sigma'}, "interpreter", "tex");
 print -depsc distancia_vs_theta_phi.eps
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 figure; hold on;
@@ -157,6 +157,7 @@ print -depsc distancia_vs_theta_phi2.eps
 r_medido = [popt(6) std(radio)] ;
 angulo_medido = [popt(7) std(angulo)] ;
 theta_medido = [popt(1) std(angulo)] ;
+
 
 %mean(dist)
 %figure
