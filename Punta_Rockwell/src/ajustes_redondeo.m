@@ -18,7 +18,7 @@ format long;
 % ang_medio = [] ;
 % theta_medio = [] ;
 %
-% [r, rsim] = punta3(L, R, R2, alpha, sigma, NUM_PUNTOS);
+% [r, rsim] = punta(L, R, R2, alpha, sigma, NUM_PUNTOS);
 %
 % resultado = [];
 %
@@ -46,7 +46,7 @@ format long;
 resultado = [];
 
 for i = 1:3
-  [r, rsim] = punta3(L, R, R2, alpha, sigma, NUM_PUNTOS);
+  [r, rsim] = punta(L, R, R2, alpha, sigma, NUM_PUNTOS);
 
   aux = [];
   for decimales = 1:7

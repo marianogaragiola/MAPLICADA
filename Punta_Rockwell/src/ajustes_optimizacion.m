@@ -23,7 +23,7 @@ for N = vec_N
 
   for i = 1: N
 
-    [r, rsim] = punta3(L, R, R2, alpha, sigma, NUM_PUNTOS);
+    [r, rsim] = punta(L, R, R2, alpha, sigma, NUM_PUNTOS);
 
     [popt, d, dist] = cuad_ort_punta(L, R, R2, alpha, sigma, rsim);
 
