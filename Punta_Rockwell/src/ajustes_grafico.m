@@ -24,10 +24,10 @@ R2=input ("Ingrese R2(en mm): ");
 % estandar que vamos a usar para simular las mediciones.
 rmed = load(filename, '-ascii');
 
-[popt, d, dist, theta_umbral] = cuad_ort_punta(L, R, R2, alpha, sigma, rmed);
+[popt, d, dist, theta_umbral, zce] = cuad_ort_punta(L, R, R2, alpha, sigma, rmed);
 
 % desviacion estandar con los datos medidos
-sigma_med = std(datos_graficar(:,6));
+sigma_med = std(dist(:,4));
 sigma = sigma_med;
 
 
@@ -44,7 +44,7 @@ for i = 1: 1
 
   [r, rsim] = punta(L, R, R2, alpha, sigma, NUM_PUNTOS);
 
-  [popt, d, dist, theta_umbral] = cuad_ort_punta(L, R, R2, alpha, sigma, rsim);
+  [popt, d, dist2, theta_umbral] = cuad_ort_punta(L, R, R2, alpha, sigma, rsim);
 
   radio = [radio; popt(6)];
   angulo = [angulo; popt(7)];
@@ -56,7 +56,7 @@ ang_medio = [ ang_medio; R2 mean(angulo) std(angulo)] ;
 theta_medio = [ theta_medio; R2 mean(theta) std(theta)] ;
 
 % Esto que sigue son cosas para hacer los distintos graficos
-theta_angulo_solido = acos(rmed(:,3)./sqrt(rmed(:,1).^2+rmed(:,2).^2+rmed(:,3).^2));
+theta_angulo_solido = acos((rmed(:,3)-zce)./sqrt(rmed(:,1).^2+rmed(:,2).^2+(rmed(:,3)-zce).^2));
 phi_angulo_solido = (1-sign(rmed(:,2)))/2*pi + acos(rmed(:,1)./sqrt(rmed(:,1).^2+rmed(:,2).^2));
 
 datos_graficar = [phi_angulo_solido theta_angulo_solido dist];
@@ -79,7 +79,7 @@ c(I4) = 4*sigma_med;
 set (0, 'defaultaxesfontname', 'Arial')
 set (0, 'defaulttextfontname', 'Arial')
 
-figure; hold on;
+f = figure('visible', 'off'); hold on;
 set(get(gca,'ylabel'),'rotation',0) % esto es para rotar el label
 set(gca, 'linewidth', 4, 'fontsize', 20); % grosor de la lineas de los ejes y el tamaño de la letra
 set(gca,'ticklength', 2.5*get(gca,'ticklength')) %largo de los ticksmarks
@@ -94,7 +94,7 @@ print -depsc ../salida/distancia_XY.eps
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Min = 0.;
 Max = 4*sigma_med;
-figure; hold on;
+f = figure('visible', 'off'); hold on;
 set(gca, 'linewidth', 4, 'fontsize', 20); % grosor de la lineas de los ejes y el tamaño de la letra
 set(gca,'ticklength', 2.5*get(gca,'ticklength')) %largo de los ticksmarks
 xlim([0 2]);
@@ -108,7 +108,7 @@ scatter(datos_graficar(:,2)/theta_umbral,datos_graficar(:,6),10,c,'filled'); col
 
 print -depsc ../salida/distancia_vs_theta.eps
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-figure; hold on;
+f = figure('visible', 'off'); hold on;
 set(get(gca,'ylabel'),'rotation',0)
 set(gca, 'linewidth', 4, 'fontsize', 20); % grosor de la lineas de los ejes y el tamaño de la letra
 set(gca,'ticklength', 2.5*get(gca,'ticklength')) %largo de los ticksmarks
@@ -121,7 +121,7 @@ scatter(datos_graficar(:,1)/pi,datos_graficar(:,2)/theta_umbral,10,c,'filled'); 
                                                         'yticklabel', {'0', '\sigma', '2\sigma', '3\sigma', '4\sigma'}, 'interpreter', 'tex');
 print -depsc ../salida/distancia_vs_theta_phi.eps
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-figure; hold on;
+f = figure('visible', 'off'); hold on;
 set(get(gca,'ylabel'),'rotation',0)
 set(gca, 'linewidth', 4, 'fontsize', 20); % grosor de la lineas de los ejes y el tamaño de la letra
 set(gca,'ticklength', 2.5*get(gca,'ticklength')) %largo de los ticksmarks

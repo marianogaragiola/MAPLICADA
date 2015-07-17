@@ -13,9 +13,9 @@ function ajustes(parameters)
       ajustes_redondeo;
     case "-e"
       ajustes_errores;
-    
+
     otherwise
       display("Los parámetros posibles son: -o, -g, -r , -e");
-    
+
     endswitch
 end;

@@ -20,14 +20,9 @@
 % Tambien como salida devuelve un vector con las distancias en el punto m�nimo
 
 
-function [popt, residual, dist, theta_umbral] = cuad_ort_punta(L, R, R2, alpha, sigma, X)
+function [popt, residual, dist, theta_umbral, zce] = cuad_ort_punta(L, R, R2, alpha, sigma, X)
 
 % ****** inicio cuerpo del programa ******
-
-% L = 0.4;
-% R = 0.2;
-% R2 = ;
-% alpha = pi/3;
 
 M = max(X,[],1) ;  % deberia devolver un arreglo de 3 elementos, con el maximo de cada columna de X
 Z2max=M(3) ; % si no anda, probar Z2max=max(X(:,3))
@@ -36,13 +31,6 @@ Z2min=m(3) ;
 Z2umbral = Z2max - (R + R2)*(1 - sin(alpha)) ; % es el umbral entre cono y esfera. Conviene usar sin(alpha)=sqrt(3)/2 ?
 theta_umbral = acos(Z2umbral/sqrt((R+R2)^2*cos(alpha)^2+Z2umbral^2));
 N = size(X,1) ;  % devuelve la cantidad de filas, que deberia ser la cantidad de puntos, si X estaba bien definido
-
-%esto va de prueba
-%zce = Z2umbral - (R+R2)*sin(alpha);
-%theta_umbral = acos((Z2umbral-zce)/sqrt((R+R2)^2*cos(alpha)^2+(Z2umbral-zce)^2));
-
-%theta_umbral2 = asin((R+R2)/(2.*sqrt((R+R2)^2*cos(alpha)^2+Z2umbral^2)))
-%theta_umbral3 = acos(Z2umbral/sqrt((R+R2)^2*cos(alpha)^2+Z2umbral^2))
 
 I = (X(:,3) >= Z2umbral) ;
 
@@ -64,7 +52,7 @@ while pasar == 0
   options=optimset('TolX',1e-18,'TolFun',1e-18,"Display","Final");
   %options
   %fminsearch se puede usar tambi�n.
-  [popt,residual] = fminunc(@(p) fun(p, X, I), p0,options) ;
+  [popt, residual] = fminunc(@(p) fun(p, X, I), p0,options) ;
   %residual
   popt = popt(:)' ;
 
@@ -83,39 +71,8 @@ while pasar == 0
   contador = contador + 1 ;
 
   if contador > NUM_MAX_IT
-%       disp(' cantidad de iteraciones')
-%       contador
-%
-%       disp('valor theta, [min]')
-%       (popt(1) - pi)*180/pi*60
-%
-%       disp('valor radio de la esfera de diamante, [mm]')
-%       popt(6) - R2
-%
-%       disp('valor amplitud cono, [drg]')
-%       popt(7)*360/pi
-%
-%       disp('valor de la funcion en el minimo')
-%       resnorm
-%
-%
-%       disp('valor del ZUmbral')
-%       Z2umbral
-%
-%       distancia = 'distancias.txt';
-%       save(distancia, '-ascii', 'residual')
-%       plot(residual, '.')
-%       hist(residual,-6.0e-04:1.0e-04:8.0e-04)
-%       disp(' promedio residuo [mm]')
-%       mean(residual)
-%       disp('desviacion estandar [mm]')
-%       std(residual)
-%
-%       suma = sum(I1);
-%       disp('suma de los elementos de I1')
-%       suma/N
-
-      return
+    disp("Número máximo de iteraciones alcanzado")
+    return
   end
 
 end %end while
@@ -123,53 +80,23 @@ end %end while
 dist = [distesf(popt, X(I,:)); distcono(popt, X(~I,:)) ];
 
 dist = [X dist];
-% armo unos vectores auxiliares para graficar las distancias
-%a = distancias(I);
-%b = distancias(~I);
 
-%c = [a; b];
-%c = c(:);
-%d = 1:1:size(c);
-%d = d(:);
 
-%dist = [d c];
-%figure
-%plot(dist(1:size(a),1),dist(1:size(a),2),'.',dist(size(a)+1:size(c),1),dist(size(a)+1:size(c),2),'.')
+Z2umbral = Z2max - (popt(6))*(1 - sin(popt(7))) ; % es el umbral entre cono y esfera medida
+zce = Z2umbral - popt(6)*sin(popt(7));
+% sino poner popt(6)-R2 en todos lados
+% theta_umbral mediddo desde el plano z = 0, a la esfera medida.
+% theta_umbral = acos(Z2umbral/sqrt((popt(6))^2*cos(popt(7))^2+Z2umbral^2));
 
+% theta_umbral medido desde el centro de la esfera
+theta_umbral = acos(sin(popt(7)));
+
+% delvolvemos los parametros en unidades de grados para los angulos y R.
 popt(1) = abs(popt(1)-pi)*180/pi*60;
 popt(6) = popt(6)-R2;
 popt(7) = popt(7)*360/pi;
 
-% disp(' cantidad de iteraciones')
-% contador
-%
-% disp(' valor theta, [min]')
-% (popt(1) - pi)*180/pi*60
-%
-% disp('valor radio de la esfera de diamante, [mm]')
-% popt(6) - R2
-%
-% disp('valor amplitud cono, [drg]')
-% popt(7)*360/pi
-%
-% disp('valor de la funcion en el minimo')
-% resnorm
-%
-% disp('valor del ZUmbral')
-% Z2umbral
-%
-% distancia = 'distancias.txt';
-% save(distancia, '-ascii', 'residual')
-% plot(residual, '.')
-% hist(residual,-6.0e-04:1.0e-04:8.0e-04)
-% disp(' promedio residuo [mm]')
-% mean(residual)
-% disp('desviacion estandar [mm]')
-% std(residual)
-%
-% suma = sum(I1);
-% disp('suma de los elementos de I1')
-% suma/N
+
 
 end
 % ****** fin del cuerpo del programa ******
