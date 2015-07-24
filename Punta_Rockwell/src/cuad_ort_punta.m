@@ -96,7 +96,5 @@ popt(1) = abs(popt(1)-pi)*180/pi*60;
 popt(6) = popt(6)-R2;
 popt(7) = popt(7)*360/pi;
 
-
-
 end
 % ****** fin del cuerpo del programa ******

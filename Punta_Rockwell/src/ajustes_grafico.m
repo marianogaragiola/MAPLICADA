@@ -1,5 +1,5 @@
-clear
-close all
+% clear
+% close all
 
 L = 0.4; % en mm
 R = 0.2; % en mm
@@ -16,9 +16,16 @@ for i=1:size(directory,1)
 end
 ans = input ("Seleccione archivo de entrada: ");
 filename=["../entrada/" directory(ans).name];
-L=input ("Ingrese L(en mm): ");
-R=input ("Ingrese R(en mm): ");
+L=input ("Ingrese L(en mm)[default 0.4]: ");
+R=input ("Ingrese R(en mm)[default 0.2]: ");
 R2=input ("Ingrese R2(en mm): ");
+
+if isempty(L)
+	L=0.4;
+end
+if isempty(R)
+	R=0.2;
+end
 
 % Primero hacemos los ajustes con los datos de Clemar para calcular los parametros y la desviacion
 % estandar que vamos a usar para simular las mediciones.
@@ -29,31 +36,6 @@ rmed = load(filename, '-ascii');
 % desviacion estandar con los datos medidos
 sigma_med = std(dist(:,4));
 sigma = sigma_med;
-
-
-% Ahora creamos los datos simulados y calcular el error en los parametros.
-r_medio = [] ;
-ang_medio = [] ;
-theta_medio = [] ;
-
-radio = [];
-angulo = [];
-theta = [];
-
-for i = 1: 1
-
-  [r, rsim] = punta(L, R, R2, alpha, sigma, NUM_PUNTOS);
-
-  [popt, d, dist2, theta_umbral] = cuad_ort_punta(L, R, R2, alpha, sigma, rsim);
-
-  radio = [radio; popt(6)];
-  angulo = [angulo; popt(7)];
-  theta = [theta; popt(1)];
-end
-
-r_medio = [ r_medio; R2 mean(radio) std(radio)] ;
-ang_medio = [ ang_medio; R2 mean(angulo) std(angulo)] ;
-theta_medio = [ theta_medio; R2 mean(theta) std(theta)] ;
 
 % Esto que sigue son cosas para hacer los distintos graficos
 theta_angulo_solido = acos((rmed(:,3)-zce)./sqrt(rmed(:,1).^2+rmed(:,2).^2+(rmed(:,3)-zce).^2));
@@ -132,8 +114,3 @@ ylabel('\theta/\theta_u','fontsize',20);
 ylim([-0.05 2]);
 scatter(datos_graficar(:,1)/pi,datos_graficar(:,2)/theta_umbral,10,datos_graficar(:,6),'filled'); colorbar;
 print -depsc ../salida/distancia_vs_theta_phi2.eps
-
-
-r_medido = [popt(6) std(radio)] ;
-angulo_medido = [popt(7) std(angulo)] ;
-theta_medido = [popt(1) std(angulo)] ;
