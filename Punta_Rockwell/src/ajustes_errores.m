@@ -26,7 +26,7 @@ angulo = [];
 theta = [];
 
 titulo = '# sigma R error_R error_relativo_R phi error_phi error_relativo_phi theta error_theta error_relativo_theta';
-save( '../salida/errores5.dat', 'titulo')
+save( '../salida/errores.dat', 'titulo')
 
 
 
@@ -49,5 +49,5 @@ for sigma = vec_sigma
 
 
   vec_salida = [sigma r_medio ang_medio theta_medio];
-  save('-append', '-ascii', '../salida/errores5.dat', 'vec_salida' )
+  save('-append', '-ascii', '../salida/errores.dat', 'vec_salida' )
 end
