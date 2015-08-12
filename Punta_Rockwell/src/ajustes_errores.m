@@ -28,8 +28,6 @@ theta = [];
 titulo = '# sigma R error_R error_relativo_R phi error_phi error_relativo_phi theta error_theta error_relativo_theta';
 save( '../salida/errores.dat', 'titulo')
 
-
-
 for sigma = vec_sigma
 
   for i = 1: 100

@@ -53,11 +53,14 @@ I3 = and(abs(datos_graficar(:,6))>2*sigma_med, abs(datos_graficar(:,6))<3*sigma_
 I4 = (abs(datos_graficar(:,6))>3*sigma_med);
 
 % creo el vector c con los distintos colores
-c(I1) = 1*sigma_med;
-c(I2) = 2*sigma_med;
-c(I3) = 3*sigma_med;
-c(I4) = 4*sigma_med;
-
+% c(I1) = 1*sigma_med;
+% c(I2) = 2*sigma_med;
+% c(I3) = 3*sigma_med;
+% c(I4) = 4*sigma_med;
+c(I1) = 0;
+c(I2) = 1*sigma_med;
+c(I3) = 2*sigma_med;
+c(I4) = 3*sigma_med;
 % c(I1,1:3) = repmat([0 0 1], [sum(I1) 1]);
 % c(I2,1:3) = repmat([0 1 0], [sum(I2) 1]);
 % c(I3,1:3) = repmat([1 1 0], [sum(I3) 1]);
@@ -94,7 +97,7 @@ set(gca, 'clim', [Min, Max]);
 scatter(datos_graficar(:,2)/theta_umbral,datos_graficar(:,6),10,c,'filled'); %colorbar('ytick', [0,sigma_med, 2*sigma_med, 3*sigma_med, 4*sigma_med],...
                                                         %'yticklabel', {'0', '\sigma', '2\sigma', '3\sigma', '4\sigma'}, 'interpreter', 'tex')
 
-caxis([sigma_med 4.*sigma_med])
+caxis([0 4.*sigma_med])
 colormap(jet(4))
 hcb = colorbar('ytick', [0, sigma_med, 2*sigma_med, 3*sigma_med, 4*sigma_med],...
                'yticklabel', {'0', '\sigma', '2\sigma', '3\sigma', '4\sigma'}, 'interpreter', 'tex');
