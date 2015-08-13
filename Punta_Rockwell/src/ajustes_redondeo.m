@@ -42,11 +42,15 @@ for i = 1:28
     reordenar(i) = resultado(1,i);
   else
     reordenar(i) = std(resultado(:,i));
-  endif
+  end
 
 end
 
 dev_std = reshape(reordenar, 4, 7);
 dev_std = dev_std(:,:)';
 
-save('../salida/desviaciones_estandar-vs-num_decimales.dat', '-ascii', 'dev_std')
+file = fopen('../salida/desviaciones_estandar-vs-num_decimales.txt', 'w');
+fprintf(file, '# Numeros decimales    Error R       Error phi       Error theta \n');
+fclose(file);
+
+save('-append', '../salida/desviaciones_estandar-vs-num_decimales.txt', '-ascii', 'dev_std')

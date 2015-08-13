@@ -14,7 +14,7 @@ R = 0.2; % en mm
 R2 = 0.25; % en mm
 alpha = pi/3; % en radianes
 %sigma = 0.35e-3; % es el equivalente a 0.35 micrometros
-vec_sigma = linspace(1e-4,1e-3,20);
+vec_sigma = linspace(1e-4,1e-3,2);
 NUM_PUNTOS = 320;
 format long;
 r_medio = [] ;
@@ -25,12 +25,13 @@ radio = [];
 angulo = [];
 theta = [];
 
-titulo = '# sigma R error_R error_relativo_R phi error_phi error_relativo_phi theta error_theta error_relativo_theta';
-save( '../salida/errores.dat', 'titulo')
+file = fopen('../salida/errores.txt', 'w');
+fprintf(file, '# sigma R error_R error_relativo_R phi error_phi error_relativo_phi theta error_theta error_relativo_theta \n');
+fclose(file);
 
 for sigma = vec_sigma
 
-  for i = 1: 100
+  for i = 1: 1
 
     [r, rsim] = punta(L, R, R2, alpha, sigma, NUM_PUNTOS);
 
@@ -47,5 +48,5 @@ for sigma = vec_sigma
 
 
   vec_salida = [sigma r_medio ang_medio theta_medio];
-  save('-append', '-ascii', '../salida/errores.dat', 'vec_salida' )
+  save('-append', '-ascii', '../salida/errores.txt', 'vec_salida' )
 end

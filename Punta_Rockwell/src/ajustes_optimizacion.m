@@ -16,8 +16,9 @@ radio = [];
 angulo = [];
 theta = [];
 
-titulo = '# sigma   1/N   R   error_R   phi   error_phi   theta   error_theta';
-save( '../salida/estabilizacion.dat', 'titulo')
+file = fopen('../salida/estabilizacion.txt', 'w');
+fprintf(file, '# sigma   1/N   R   error_R   phi   error_phi   theta   error_theta \n');
+fclose(file);
 
 for N = vec_N
 
@@ -39,5 +40,5 @@ for N = vec_N
 
 
   vec_salida = [sigma 1./N r_medio ang_medio theta_medio];
-  save('-append', '-ascii', '../salida/estabilizacion.dat', 'vec_salida' )
+  save('-append', '-ascii', '../salida/estabilizacion.txt', 'vec_salida' )
 end

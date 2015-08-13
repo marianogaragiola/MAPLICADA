@@ -11,15 +11,15 @@ Nsim = 10;
 format long;
 
 % Acá leo los archivos que  estan en la carpeta entrada y después los paramétros por input
-directory=dir("../entrada");
+directory = dir('../entrada');
 for i=1:size(directory,1)
-	display([num2str(i) ") " directory(i).name]);
+	display([num2str(i) ') ' directory(i).name]);
 end
-ans = input ("Seleccione archivo de entrada: ");
-filename=["../entrada/" directory(ans).name];
-L=input ("Ingrese L(en mm)[default 0.4]: ");
-R=input ("Ingrese R(en mm)[default 0.2]: ");
-R2=input ("Ingrese R2(en mm): ");
+ans = input ('Seleccione archivo de entrada: ');
+filename=['../entrada/' directory(ans).name];
+L=input ('Ingrese L(en mm)[default 0.4]: ');
+R=input ('Ingrese R(en mm)[default 0.2]: ');
+R2=input ('Ingrese R2(en mm): ');
 
 if isempty(L)
 	L=0.4;
@@ -33,6 +33,9 @@ end
 rmed = load(filename, '-ascii');
 
 [popt, d, dist, theta_umbral, zce] = cuad_ort_punta(L, R, R2, alpha, sigma, rmed);
+
+save('-ascii', '../salida/distancia.txt', 'dist');
+
 
 % desviacion estandar con los datos medidos
 sigma_med = std(dist(:,4));
@@ -58,11 +61,11 @@ r_medido = [popt(6) std(radio)] ;
 angulo_medido = [popt(7) std(angulo)] ;
 theta_medido = [popt(1) std(theta)] ;
 
-disp("Radio de la esfera palpadora")
+disp('Radio de la esfera palpadora')
 r_medido
 
-disp("Ángulo de abertura del cono")
+disp('Ángulo de abertura del cono')
 angulo_medido
 
-disp("Ángulo entre el eje z y el eje del cono")
+disp('Ángulo entre el eje z y el eje del cono')
 theta_medido

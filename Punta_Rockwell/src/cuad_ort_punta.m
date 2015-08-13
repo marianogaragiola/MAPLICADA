@@ -38,8 +38,8 @@ p0(1) = pi ; % �ngulo con el eje z
 p0(2) = 0 ; % �ngulo azimutal
 p0(3) = mean(X(:,1)) ; % si no anda, probar mean(X)(1)
 p0(4) = mean(X(:,2)) ;
-p0(5) = Z2max - (R + R2) + (R + R2)/sin(alpha) ;% vertice del cono medido. Para vertice del cono "real" usar Z2max-(R+R2)+R/sin(alpha)
-p0(6) = R + R2 ;  % radio de la esfera medida. Para radio de la esfera "real" usar R
+p0(5) = Z2max - (R + R2) + (R + R2)/sin(alpha) ;% vertice del cono medido. Para vertice del cono 'real' usar Z2max-(R+R2)+R/sin(alpha)
+p0(6) = R + R2 ;  % radio de la esfera medida. Para radio de la esfera 'real' usar R
 p0(7) = pi/3 ;
 
 NUM_MAX_IT = 30 ;% numero maximo de iteraciones
@@ -48,12 +48,12 @@ contador = 1;
 
 while pasar == 0
 
-  %[popt, resnorm, residual] = lsqnonlin(@(p) fun(p, X, I), p0) ;
-  options=optimset('TolX',1e-18,'TolFun',1e-18,"Display","Final");
+  % [popt, resnorm, residual] = lsqnonlin(@(p) fun(p, X, I), p0) ;
+  options = optimset('TolX',1e-18,'TolFun',1e-18,'Display','Final');
   %options
   %fminsearch se puede usar tambi�n.
   [popt, residual] = fminunc(@(p) fun(p, X, I), p0,options) ;
-  %residual
+
   popt = popt(:)' ;
 
   v0 = popt(3:5) ;
@@ -71,7 +71,7 @@ while pasar == 0
   contador = contador + 1 ;
 
   if contador > NUM_MAX_IT
-    disp("Número máximo de iteraciones alcanzado")
+    disp('Número máximo de iteraciones alcanzado')
     return
   end
 
