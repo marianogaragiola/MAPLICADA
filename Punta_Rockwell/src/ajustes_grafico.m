@@ -43,7 +43,7 @@ phi_angulo_solido = (1-sign(rmed(:,2)))/2*pi + acos(rmed(:,1)./sqrt(rmed(:,1).^2
 
 datos_graficar = [phi_angulo_solido theta_angulo_solido dist];
 
-save('-ascii', '../salida/distancias_grafico.dat', 'datos_graficar');
+save('-ascii', '../salida/distancias_grafico.txt', 'datos_graficar');
 
 % en lo que sigue aca abajo sirve para hacer un terrible grafico
 % eligo tres regiones para los distintos colores

@@ -32,10 +32,9 @@ end
 % estandar que vamos a usar para simular las mediciones.
 rmed = load(filename, '-ascii');
 
-[popt, d, dist, theta_umbral, zce] = cuad_ort_punta(L, R, R2, alpha, sigma, rmed);
+[popt, d, dist, theta_umbral, zce, errores] = cuad_ort_punta(L, R, R2, alpha, sigma, rmed);
 
 save('-ascii', '../salida/distancia.txt', 'dist');
-
 
 % desviacion estandar con los datos medidos
 sigma_med = std(dist(:,4));
@@ -50,11 +49,11 @@ theta = [];
 for i = 1: Nsim
   [r, rsim] = punta(L, R, R2, alpha, sigma, NUM_PUNTOS);
 
-  [popt, d, dist2, theta_umbral] = cuad_ort_punta(L, R, R2, alpha, sigma, rsim);
+  [popt2, d2, dist2, theta_umbral2] = cuad_ort_punta(L, R, R2, alpha, sigma, rsim);
 
-  radio = [radio; popt(6)];
-  angulo = [angulo; popt(7)];
-  theta = [theta; popt(1)];
+  radio = [radio; popt2(6)];
+  angulo = [angulo; popt2(7)];
+  theta = [theta; popt2(1)];
 end
 
 r_medido = [popt(6) std(radio)] ;
@@ -69,3 +68,5 @@ angulo_medido
 
 disp('Ángulo entre el eje z y el eje del cono')
 theta_medido
+
+errores
