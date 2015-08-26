@@ -16,23 +16,23 @@ for i=1:size(directory,1)
 	display([num2str(i) ') ' directory(i).name]);
 end
 ans = input ('Seleccione archivo de entrada: ');
-filename=['../entrada/' directory(ans).name];
-L=input ('Ingrese L(en mm)[default 0.4]: ');
-R=input ('Ingrese R(en mm)[default 0.2]: ');
-R2=input ('Ingrese R2(en mm): ');
+filename = ['../entrada/' directory(ans).name];
+L = input ('Ingrese L(en mm)[default 0.4]: ');
+R = input ('Ingrese R(en mm)[default 0.2]: ');
+R2 = input ('Ingrese R2(en mm): ');
 
 if isempty(L)
-	L=0.4;
+	L = 0.4;
 end
 if isempty(R)
-	R=0.2;
+	R = 0.2;
 end
 
 % Primero hacemos los ajustes con los datos de Clemar para calcular los parametros y la desviacion
 % estandar que vamos a usar para simular las mediciones.
 rmed = load(filename, '-ascii');
 
-[popt, d, dist, theta_umbral, zce, errores] = cuad_ort_punta(L, R, R2, alpha, sigma, rmed);
+[popt, d, dist, theta_umbral, zce] = cuad_ort_punta(L, R, R2, alpha, sigma, rmed);
 
 save('-ascii', '../salida/distancia.txt', 'dist');
 
@@ -60,13 +60,20 @@ r_medido = [popt(6) std(radio)] ;
 angulo_medido = [popt(7) std(angulo)] ;
 theta_medido = [popt(1) std(theta)] ;
 
-disp('Radio de la esfera palpadora')
-r_medido
+file = fopen('../salida/parametros_optimizacion.txt', 'w');
+fprintf(file, 'Radio de la esfera palpadora = (%.12e +/- %.12e) [milimetros] \n\n', r_medido(1), r_medido(2));
 
-disp('Ángulo de abertura del cono')
-angulo_medido
+fprintf(file, 'Angulo de abertura del cono = (%.12e +/- %.12e) [grados]\n\n', angulo_medido(1), angulo_medido(2));
 
-disp('Ángulo entre el eje z y el eje del cono')
-theta_medido
+fprintf(file, 'Angulo entre el eje z y el eje del cono = (%.12e +/- %.12e) [min]\n\n', theta_medido(1), theta_medido(2));
 
-errores
+fclose(file);
+
+% disp('Radio de la esfera palpadora')
+% r_medido
+%
+% disp('Ángulo de abertura del cono')
+% angulo_medido
+%
+% disp('Ángulo entre el eje z y el eje del cono')
+% theta_medido
