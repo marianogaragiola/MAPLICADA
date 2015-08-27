@@ -20,7 +20,7 @@
 % Tambien como salida devuelve un vector con las distancias en el punto m�nimo
 
 
-function [popt, residual, dist, theta_umbral, zce, errores] = cuad_ort_punta(L, R, R2, alpha, sigma, X)
+function [popt, residual, dist, theta_umbral, zce, popt_err] = cuad_ort_punta(L, R, R2, alpha, sigma, X)
 
 % ****** inicio cuerpo del programa ******
 
@@ -53,9 +53,12 @@ while pasar == 0
   %options
   %fminsearch se puede usar tambi�n.
   % [popt, residual] = fminunc(@(p) fun(p, X, I), p0,options) ;
-  [popt, residual, EXITFLAG, OUTPUT, GRAD, HESSIAN] = fminunc(@(p) fun(p, X, I), p0,options) ;
+  [popt, residual, EXITFLAG, OUTPUT, GRAD, HESSIAN] = fminunc(@(p) fun(p, X, I), p0, options) ;
 
-  errores = abs(sqrt(diag(inv(HESSIAN))));
+  Cov = diag(inv(HESSIAN));
+  neg_cov = (Cov<0.0);
+  errores = sqrt(diag(inv(HESSIAN)));
+  errores(neg_cov) = 0.;
 
   popt = popt(:)' ;
 
@@ -98,10 +101,14 @@ theta_umbral = acos(sin(popt(7)));
 popt(1) = abs(popt(1)-pi)*180/pi*60;
 popt(6) = popt(6)-R2;
 popt(7) = popt(7)*360/pi;
-
 popt = popt(:);
 
-errores = [popt, errores];
+%errores(1) = abs(errores(1)-pi)*180/pi*60;
+errores(1) = errores(1)*180/pi*60;
+errores(7) = errores(7)*360/pi;
+errores(:) = errores(:);
+
+popt_err = [popt, errores];
 
 end
 % ****** fin del cuerpo del programa ******

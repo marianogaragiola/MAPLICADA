@@ -32,7 +32,7 @@ end
 % estandar que vamos a usar para simular las mediciones.
 rmed = load(filename, '-ascii');
 
-[popt, d, dist, theta_umbral, zce] = cuad_ort_punta(L, R, R2, alpha, sigma, rmed);
+[popt, d, dist, theta_umbral, zce, popt_err] = cuad_ort_punta(L, R, R2, alpha, sigma, rmed);
 
 save('-ascii', '../salida/distancia.txt', 'dist');
 
@@ -61,19 +61,14 @@ angulo_medido = [popt(7) std(angulo)] ;
 theta_medido = [popt(1) std(theta)] ;
 
 file = fopen('../salida/parametros_optimizacion.txt', 'w');
-fprintf(file, 'Radio de la esfera palpadora = (%.12e +/- %.12e) [milimetros] \n\n', r_medido(1), r_medido(2));
 
-fprintf(file, 'Angulo de abertura del cono = (%.12e +/- %.12e) [grados]\n\n', angulo_medido(1), angulo_medido(2));
+fprintf(file, 'Radio de la esfera palpadora, error monte carlo = (%.12e +/- %.12e) [milimetros] \n', r_medido(1), r_medido(2));
+fprintf(file, 'Radio de la esfera palpadora, error matriz covarianza = (%.12e +/- %.12e) [milimetros] \n\n', popt_err(6,1), popt_err(6,2));
 
-fprintf(file, 'Angulo entre el eje z y el eje del cono = (%.12e +/- %.12e) [min]\n\n', theta_medido(1), theta_medido(2));
+fprintf(file, 'Angulo de abertura del cono, error monte carlo = (%.12e +/- %.12e) [grados]\n', angulo_medido(1), angulo_medido(2));
+fprintf(file, 'Angulo de abertura del cono, error matriz covarianza = (%.12e +/- %.12e) [grados]\n\n', popt_err(7,1), popt_err(7,2));
+
+fprintf(file, 'Angulo entre el eje z y el eje del cono, error monte carlo = (%.12e +/- %.12e) [min]\n', theta_medido(1), theta_medido(2));
+fprintf(file, 'Angulo entre el eje z y el eje del cono, error matriz covarianza = (%.12e +/- %.12e) [min]\n', popt_err(1,1), popt_err(1,2));
 
 fclose(file);
-
-% disp('Radio de la esfera palpadora')
-% r_medido
-%
-% disp('Ángulo de abertura del cono')
-% angulo_medido
-%
-% disp('Ángulo entre el eje z y el eje del cono')
-% theta_medido
