@@ -1,6 +1,0 @@
-Radio de la esfera palpadora = (2.008390668534e-01 +/- 1.393953094321e-04) [milimetros] 
-
-Angulo de abertura del cono = (1.199461060436e+02 +/- 1.017769080076e-02) [grados]
-
-Angulo entre el eje z y el eje del cono = (9.412239873550e+00 +/- 1.627107657888e-01) [min]
-
