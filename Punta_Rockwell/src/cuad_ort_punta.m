@@ -49,15 +49,29 @@ contador = 1;
 while pasar == 0
 
   % [popt, resnorm, residual] = lsqnonlin(@(p) fun(p, X, I), p0) ;
-  options = optimset('TolX',1e-18,'TolFun',1e-18,'Display','Final');
+  options = optimset('TolX',1e-18,'TolFun',1e-18,'MaxIter',2000,'Display','Final');
   %options
   %fminsearch se puede usar tambi�n.
   % [popt, residual] = fminunc(@(p) fun(p, X, I), p0,options) ;
+<<<<<<< HEAD
   [popt, residual, EXITFLAG, OUTPUT, GRAD, HESSIAN] = fminunc(@(p) fun(p, X, I), p0, options) ;
 
   Cov = diag(inv(HESSIAN));
   neg_cov = (Cov<0.0);
   errores = sqrt(diag(inv(HESSIAN)));
+=======
+  [popt, residual, EXITFLAG, OUTPUT, GRAD] = fminunc(@(p) fun(p, X, I), p0, options) ;
+
+  HESSIAN = hessian(@(p) fun(p, X, I), popt);
+
+
+
+  Cov = diag(inv(HESSIAN));
+  save('-ascii', 'hesiano.dat', 'Cov')
+  neg_cov = (Cov<0.0);
+  % errores = sqrt(diag(inv(HESSIAN)));
+  errores = sqrt(Cov);
+>>>>>>> de6c8235d6189b5a1a38f835a1cf52e1954f0e2f
   errores(neg_cov) = 0.;
 
   popt = popt(:)' ;
