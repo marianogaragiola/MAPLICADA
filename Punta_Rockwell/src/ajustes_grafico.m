@@ -80,64 +80,69 @@ set (0, 'defaulttextfontname', 'Arial')
 
 f = figure('visible', 'off'); hold on;
 set(get(gca,'ylabel'),'rotation',0) % esto es para rotar el label
-set(gca, 'linewidth', 2, 'fontsize', 20); % grosor de la lineas de los ejes y el tamaño de la letra
+set(gca, 'linewidth', 4, 'fontsize', 20); % grosor de la lineas de los ejes y el tamaño de la letra
 set(gca,'ticklength', 2.5*get(gca,'ticklength')) %largo de los ticksmarks
-% graphics_toolkit gnuplot
+graphics_toolkit gnuplot
 xlim([min(datos_graficar(:,3)) max(datos_graficar(:,3))]);
 xlabel('X','fontsize',20);
 ylim([min(datos_graficar(:,3)) max(datos_graficar(:,3))]);
 ylabel('Y','fontsize',20);
-scatter(datos_graficar(:,3),datos_graficar(:,4),10,c,'filled');
-caxis([0 4.*sigma_med]);
-colormap(co);
-hcb = colorbar('ytick', [0,sigma_med, 2*sigma_med, 3*sigma_med, 4*sigma_med],...
-                                                        'yticklabel', {'0', 's', '2s', '3s', '4s'},'FontName','Symbol');
+scatter(datos_graficar(:,3),datos_graficar(:,4),10,c,'filled'); % colorbar('ytick', [0,sigma_med, 2*sigma_med, 3*sigma_med, 4*sigma_med],...
+                                                        % 'yticklabel', {'0', '\sigma', '2\sigma', '3\sigma', '4\sigma'}, 'interpreter', 'tex')
+
+caxis([0 4.*sigma_med])
+colormap(co)
+hcb = colorbar('ytick', [0, sigma_med, 2*sigma_med, 3*sigma_med, 4*sigma_med],...
+               'yticklabel', {'0', '\sigma', '2\sigma', '3\sigma', '4\sigma'}, 'interpreter', 'tex');
 
 print -depsc ../salida/distancia_XY.eps
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-sigma2 = sprintf('%2e', sigma_med);
 Min = 0.;
 Max = 4*sigma_med;
 f = figure('visible', 'off'); hold on;
-set(gca, 'linewidth', 2, 'fontsize', 20); % grosor de la lineas de los ejes y el tamaño de la letra
+set(gca, 'linewidth', 4, 'fontsize', 20); % grosor de la lineas de los ejes y el tamaño de la letra
 set(gca,'ticklength', 2.5*get(gca,'ticklength')) %largo de los ticksmarks
 xlim([0 2]);
-ylim([-max(datos_graficar(:,6)) max(datos_graficar(:,6))]);
-% graphics_toolkit gnuplot
+graphics_toolkit gnuplot
 xlabel('\theta/\theta_u','fontsize',20);
 ylabel('distancias','fontsize',20);
 h = colorbar;
 set(gca, 'clim', [Min, Max]);
-scatter(datos_graficar(:,2)/theta_umbral,datos_graficar(:,6),10,c,'filled');
+scatter(datos_graficar(:,2)/theta_umbral,datos_graficar(:,6),10,c,'filled'); %colorbar('ytick', [0,sigma_med, 2*sigma_med, 3*sigma_med, 4*sigma_med],...
+                                                        %'yticklabel', {'0', '\sigma', '2\sigma', '3\sigma', '4\sigma'}, 'interpreter', 'tex')
 
-caxis([0 4.*sigma_med]);
-colormap(co);
+caxis([0 4.*sigma_med])
+colormap(co)
 hcb = colorbar('ytick', [0, sigma_med, 2*sigma_med, 3*sigma_med, 4*sigma_med],...
-               'yticklabel', {'0', 's', '2s', '3s', '4s'}, 'FontName','Symbol');
+               'yticklabel', {'0', '\sigma', '2\sigma', '3\sigma', '4\sigma'}, 'interpreter', 'tex');
 
+%set(hcb,'YTickMode','manual');
 print -depsc ../salida/distancia_vs_theta.eps
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 f = figure('visible', 'off'); hold on;
 set(get(gca,'ylabel'),'rotation',0)
-set(gca, 'linewidth', 2, 'fontsize', 20); % grosor de la lineas de los ejes y el tamaño de la letra
+set(gca, 'linewidth', 4, 'fontsize', 20); % grosor de la lineas de los ejes y el tamaño de la letra
 set(gca,'ticklength', 2.5*get(gca,'ticklength')) %largo de los ticksmarks
-% graphics_toolkit gnuplot
+graphics_toolkit gnuplot
 xlim([-0.2 2.2]);
 xlabel('\phi/\pi','fontsize',20);
 ylim([-0.05 2]);
 ylabel('\theta/\theta_u','fontsize',20);
-caxis([0 4.*sigma_med]);
-colormap(co);
-scatter(datos_graficar(:,1)/pi,datos_graficar(:,2)/theta_umbral,10,c,'filled');  colorbar('ytick', [0,sigma_med, 2*sigma_med, 3*sigma_med, 4*sigma_med],...
-                                                        'yticklabel', {'0', 's', '2s', '3s', '4s'}, 'FontName','Symbol');
+scatter(datos_graficar(:,1)/pi,datos_graficar(:,2)/theta_umbral,10,c,'filled'); %colorbar('ytick', [0,sigma_med, 2*sigma_med, 3*sigma_med, 4*sigma_med],...
+                                                        %'yticklabel', {'0', '\sigma', '2\sigma', '3\sigma', '4\sigma'}, 'interpreter', 'tex');
+
+caxis([0 4.*sigma_med])
+colormap(co)
+hcb = colorbar('ytick', [0, sigma_med, 2*sigma_med, 3*sigma_med, 4*sigma_med],...
+               'yticklabel', {'0', '\sigma', '2\sigma', '3\sigma', '4\sigma'}, 'interpreter', 'tex');
+
 print -depsc ../salida/distancia_vs_theta_phi.eps
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 f = figure('visible', 'off'); hold on;
 set(get(gca,'ylabel'),'rotation',0)
-set(gca, 'linewidth', 2, 'fontsize', 20); % grosor de la lineas de los ejes y el tamaño de la letra
+set(gca, 'linewidth', 4, 'fontsize', 20); % grosor de la lineas de los ejes y el tamaño de la letra
 set(gca,'ticklength', 2.5*get(gca,'ticklength')) %largo de los ticksmarks
-% 	graphics_toolkit gnuplot
+graphics_toolkit gnuplot
 xlabel('\phi/\pi','fontsize',20);
 xlim([-0.2 2.2]);
 ylabel('\theta/\theta_u','fontsize',20);
