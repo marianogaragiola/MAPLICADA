@@ -53,14 +53,12 @@ while pasar == 0
   %options
   %fminsearch se puede usar tambi�n.
   % [popt, residual] = fminunc(@(p) fun(p, X, I), p0,options) ;
-  [popt, residual, EXITFLAG, OUTPUT, GRAD] = fminunc(@(p) fun(p, X, I), p0, options) ;
+  [popt, residual, EXITFLAG, OUTPUT, GRAD, HESSIAN] = fminunc(@(p) fun(p, X, I), p0, options) ;
 
-  HESSIAN = hessian(@(p) fun(p, X, I), popt);
-
-
+  % HESSIAN = hessian(@(p) fun(p, X, I), popt);
 
   Cov = diag(inv(HESSIAN));
-  save('-ascii', 'hesiano.dat', 'Cov')
+  % save('-ascii', 'hesiano.dat', 'Cov')
   neg_cov = (Cov<0.0);
   % errores = sqrt(diag(inv(HESSIAN)));
   errores = sqrt(Cov);
