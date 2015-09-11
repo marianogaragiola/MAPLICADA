@@ -18,7 +18,7 @@ format long;
 % aca estaria bueno cambiar los nombres de las variables si no es un quilombo
 resultado = [];
 
-for i = 1:5
+for i = 1:10
   [r, rsim] = punta(L, R, R2, alpha, sigma, NUM_PUNTOS);
 
   aux = [];

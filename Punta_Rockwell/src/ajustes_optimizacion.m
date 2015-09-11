@@ -16,7 +16,7 @@ radio = [];
 angulo = [];
 theta = [];
 
-file = fopen('../salida/estabilizacion.txt', 'w');
+file = fopen('../salida/optimizacion.txt', 'w');
 fprintf(file, '# sigma   1/N   R   error_R   phi   error_phi   theta   error_theta \n');
 fclose(file);
 
