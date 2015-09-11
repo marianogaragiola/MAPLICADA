@@ -1,6 +1,8 @@
 *.pdf
 *.png
 *.ps
+*.eps
+*.dat
 *.xls
 *.zip
 *.eps

@@ -1,0 +1,13 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 13.04.2 ] */
+
+/* [wxMaxima: input   start ] */
+F1(x,y,z,R) := (sqrt((X_i-x)²+(Y_i-y)²+(Z_i-z)²)-R)^2;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+F2(x,y,z,R,φ,v1,v2) := ((X_i-x-R*v1/sin(φ/2))²+(Y_i-y-R*v2/sin(φ/2))²+(Z_i-z-R*sqrt(1-v1²-v2²)/sin(φ/2))²)*sin(β-φ/2)²;
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
