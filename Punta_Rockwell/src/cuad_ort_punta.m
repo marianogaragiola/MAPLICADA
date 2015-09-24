@@ -55,8 +55,12 @@ while pasar == 0
   % [popt, residual] = fminunc(@(p) fun(p, X, I), p0,options) ;
   [popt, residual, EXITFLAG, OUTPUT, GRAD, HESSIAN] = fminunc(@(p) fun(p, X, I), p0, options) ;
 
+  % HESSIAN = hessian(@(p) fun(p, X, I), popt);
+
   Cov = diag(inv(HESSIAN));
 
+  % HESSIAN = inv(HESSIAN);
+  save('-ascii', 'hessiano.dat', 'HESSIAN');
   neg_cov = (Cov<0.0);
   errores = sqrt(Cov);
   errores(neg_cov) = 0.;
@@ -88,6 +92,11 @@ dist = [distesf(popt, X(I,:)); distcono(popt, X(~I,:)) ];
 
 dist = [X dist];
 
+Xesfera = X(I,:);
+Xcono = X(~I,:);
+
+save('-ascii', '~/Desktop/esfera.dat', 'Xesfera');
+save('-ascii', '~/Desktop/cono.dat', 'Xcono');
 
 Z2umbral = Z2max - (popt(6))*(1 - sin(popt(7))) ; % es el umbral entre cono y esfera medida
 zce = Z2umbral - popt(6)*sin(popt(7));
