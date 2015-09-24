@@ -20,19 +20,19 @@
 % Tambien como salida devuelve un vector con las distancias en el punto m�nimo
 
 
-function [popt, residual, dist, theta_umbral, zce, popt_err] = cuad_ort_punta(L, R, R2, alpha, sigma, X)
+function [popt, F, dist, theta_umbral, zce, popt_err] = cuad_ort_punta(L, R, R2, alpha, sigma, X)
 
 % ****** inicio cuerpo del programa ******
 
 M = max(X,[],1) ;  % deberia devolver un arreglo de 3 elementos, con el maximo de cada columna de X
-Z2max=M(3) ; % si no anda, probar Z2max=max(X(:,3))
+Z2max = M(3) ; % si no anda, probar Z2max=max(X(:,3))
 m = min(X,[],1) ; % me parece que no hace falta saber el m�nimo, no se usa en ningun lado despues
-Z2min=m(3) ;
+Z2min = m(3) ;
 Z2umbral = Z2max - (R + R2)*(1 - sin(alpha)) ; % es el umbral entre cono y esfera. Conviene usar sin(alpha)=sqrt(3)/2 ?
 theta_umbral = acos(Z2umbral/sqrt((R+R2)^2*cos(alpha)^2+Z2umbral^2));
 N = size(X,1) ;  % devuelve la cantidad de filas, que deberia ser la cantidad de puntos, si X estaba bien definido
 
-I = (X(:,3) >= Z2umbral) ;
+II = (X(:,3) >= Z2umbral) ;
 
 p0(1) = pi ; % �ngulo con el eje z
 p0(2) = 0 ; % �ngulo azimutal
@@ -46,35 +46,21 @@ NUM_MAX_IT = 30 ;% numero maximo de iteraciones
 pasar = 0;
 contador = 1;
 
-while pasar == 0
+d = repmat(0, [size(X,1), 1]);
+stol = 1e-8;
+niter = 50;
+wt = repmat(size(X,1), [size(X,1), 1]);
+dp = 0.0000000000001*ones(size(p0) );  % valor optimo del paso para la derivada
 
-  % [popt, resnorm, residual] = lsqnonlin(@(p) fun(p, X, I), p0) ;
-  options = optimset('TolX',1e-18,'TolFun',1e-18,'MaxIter',2000,'Display','Final');
-  %options
-  %fminsearch se puede usar tambi�n.
-  % [popt, residual] = fminunc(@(p) fun(p, X, I), p0,options) ;
-<<<<<<< HEAD
-  [popt, residual, EXITFLAG, OUTPUT, GRAD, HESSIAN] = fminunc(@(p) fun(p, X, I), p0, options) ;
+% while pasar == 0
 
-  Cov = diag(inv(HESSIAN));
-  neg_cov = (Cov<0.0);
-  errores = sqrt(diag(inv(HESSIAN)));
-=======
-  [popt, residual, EXITFLAG, OUTPUT, GRAD] = fminunc(@(p) fun(p, X, I), p0, options) ;
+  % d = fun(X, p0);
 
-  HESSIAN = hessian(@(p) fun(p, X, I), popt);
-
-
-
-  Cov = diag(inv(HESSIAN));
-  save('-ascii', 'hesiano.dat', 'Cov')
-  neg_cov = (Cov<0.0);
-  % errores = sqrt(diag(inv(HESSIAN)));
-  errores = sqrt(Cov);
->>>>>>> de6c8235d6189b5a1a38f835a1cf52e1954f0e2f
-  errores(neg_cov) = 0.;
+  [F, popt, cvg, iter, corp, covp, covr] = leasqr(X, d, p0, 'fun', stol, niter, wt, dp);
 
   popt = popt(:)' ;
+
+  errores = sqrt(diag(covp));
 
   v0 = popt(3:5) ;
   v1 = [cos(popt(2))*sin(popt(1)) sin(popt(2))*sin(popt(1)) cos(popt(1))] ; % eje del cono
@@ -86,8 +72,8 @@ while pasar == 0
 
   I1 = ( -sin(popt(7)) >= dot(X-C,V1,2)./sqrt(dot(X-C,X-C,2)) ) ;
 
-  pasar = isequal(I,I1); % devuelve true si son iguales, false si son distintos
-  I = I1;
+  pasar = isequal(II,I1); % devuelve true si son iguales, false si son distintos
+  II = I1;
   contador = contador + 1 ;
 
   if contador > NUM_MAX_IT
@@ -95,12 +81,17 @@ while pasar == 0
     return
   end
 
-end %end while
+% end %end while
 
-dist = [distesf(popt, X(I,:)); distcono(popt, X(~I,:)) ];
+dist = [distesf(X(II,:), popt); distcono(X(~II,:), popt) ];
 
 dist = [X dist];
 
+Xesfera = X(II,:);
+Xcono = X(~II,:);
+
+save('-ascii', '~/Desktop/esfera.dat', 'Xesfera');
+save('-ascii', '~/Desktop/cono.dat', 'Xcono');
 
 Z2umbral = Z2max - (popt(6))*(1 - sin(popt(7))) ; % es el umbral entre cono y esfera medida
 zce = Z2umbral - popt(6)*sin(popt(7));
@@ -111,13 +102,13 @@ zce = Z2umbral - popt(6)*sin(popt(7));
 % theta_umbral medido desde el centro de la esfera
 theta_umbral = acos(sin(popt(7)));
 
+% popt(:)
 % delvolvemos los parametros en unidades de grados para los angulos y R.
 popt(1) = abs(popt(1)-pi)*180/pi*60;
 popt(6) = popt(6)-R2;
 popt(7) = popt(7)*360/pi;
 popt = popt(:);
 
-%errores(1) = abs(errores(1)-pi)*180/pi*60;
 errores(1) = errores(1)*180/pi*60;
 errores(7) = errores(7)*360/pi;
 errores(:) = errores(:);

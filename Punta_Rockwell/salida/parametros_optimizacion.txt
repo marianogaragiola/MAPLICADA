@@ -1,8 +1,0 @@
-Radio de la esfera palpadora, error monte carlo = (1.943267383014e-01 +/- 1.832210142619e-04) [milimetros] 
-Radio de la esfera palpadora, error matriz covarianza = (1.943267383014e-01 +/- 5.479620301029e-02) [milimetros] 
-
-Angulo de abertura del cono, error monte carlo = (1.200787699726e+02 +/- 6.567740049025e-03) [grados]
-Angulo de abertura del cono, error matriz covarianza = (1.200787699726e+02 +/- 1.773378518839e+00) [grados]
-
-Angulo entre el eje z y el eje del cono, error monte carlo = (2.408732940647e+01 +/- 3.654162624244e-01) [min]
-Angulo entre el eje z y el eje del cono, error matriz covarianza = (2.408732940647e+01 +/- 4.192084804440e+01) [min]
