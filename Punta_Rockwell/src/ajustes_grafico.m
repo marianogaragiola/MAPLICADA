@@ -43,7 +43,7 @@ phi_angulo_solido = (1-sign(rmed(:,2)))/2*pi + acos(rmed(:,1)./sqrt(rmed(:,1).^2
 
 datos_graficar = [phi_angulo_solido theta_angulo_solido dist];
 
-save('-ascii', '../salida/distancias_grafico.txt', 'datos_graficar');
+% save('-ascii', '../salida/distancias_grafico.txt', 'datos_graficar');
 
 % en lo que sigue aca abajo sirve para hacer un terrible grafico
 % eligo tres regiones para los distintos colores
@@ -95,7 +95,7 @@ colormap(co)
 hcb = colorbar('ytick', [0, sigma_med, 2*sigma_med, 3*sigma_med, 4*sigma_med],...
                'yticklabel', {'0', '\sigma', '2\sigma', '3\sigma', '4\sigma'}, 'interpreter', 'tex');
 
-print -depsc ../salida/distancia_XY.eps
+print -dpng ../salida/distancia_XY.png
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Min = 0.;
 Max = 4*sigma_med;
@@ -117,7 +117,7 @@ hcb = colorbar('ytick', [0, sigma_med, 2*sigma_med, 3*sigma_med, 4*sigma_med],..
                'yticklabel', {'0', '\sigma', '2\sigma', '3\sigma', '4\sigma'}, 'interpreter', 'tex');
 
 %set(hcb,'YTickMode','manual');
-print -depsc ../salida/distancia_vs_theta.eps
+print -dpng ../salida/distancia_vs_theta.png
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 f = figure('visible', 'off'); hold on;
 set(get(gca,'ylabel'),'rotation',0)
@@ -136,7 +136,7 @@ colormap(co)
 hcb = colorbar('ytick', [0, sigma_med, 2*sigma_med, 3*sigma_med, 4*sigma_med],...
                'yticklabel', {'0', '\sigma', '2\sigma', '3\sigma', '4\sigma'}, 'interpreter', 'tex');
 
-print -depsc ../salida/distancia_vs_theta_phi.eps
+print -dpng ../salida/distancia_vs_theta_phi.png
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 f = figure('visible', 'off'); hold on;
 set(get(gca,'ylabel'),'rotation',0)
@@ -148,4 +148,4 @@ xlim([-0.2 2.2]);
 ylabel('\theta/\theta_u','fontsize',20);
 ylim([-0.05 2]);
 scatter(datos_graficar(:,1)/pi,datos_graficar(:,2)/theta_umbral,10,datos_graficar(:,6),'filled'); colorbar;
-print -depsc ../salida/distancia_vs_theta_phi2.eps
+print -dpng ../salida/distancia_vs_theta_phi2.png

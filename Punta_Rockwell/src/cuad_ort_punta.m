@@ -55,12 +55,9 @@ while pasar == 0
   % [popt, residual] = fminunc(@(p) fun(p, X, I), p0,options) ;
   [popt, residual, EXITFLAG, OUTPUT, GRAD, HESSIAN] = fminunc(@(p) fun(p, X, I), p0, options) ;
 
-  % HESSIAN = hessian(@(p) fun(p, X, I), popt);
-
   Cov = diag(inv(HESSIAN));
-  % save('-ascii', 'hesiano.dat', 'Cov')
+
   neg_cov = (Cov<0.0);
-  % errores = sqrt(diag(inv(HESSIAN)));
   errores = sqrt(Cov);
   errores(neg_cov) = 0.;
 
@@ -101,6 +98,7 @@ zce = Z2umbral - popt(6)*sin(popt(7));
 % theta_umbral medido desde el centro de la esfera
 theta_umbral = acos(sin(popt(7)));
 
+popt(:)
 % delvolvemos los parametros en unidades de grados para los angulos y R.
 popt(1) = abs(popt(1)-pi)*180/pi*60;
 popt(6) = popt(6)-R2;

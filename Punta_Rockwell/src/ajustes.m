@@ -15,11 +15,10 @@ function ajustes(p1, p2, p3, p4, p5)
       parameters = [p1; p2; p3; p4];
     case 5
       parameters = [p1; p2; p3; p4; p5];
-  end %switch
+  end
 
   for i = 1:length(parameters);
     param = parameters(i,1);
-    % param
     switch(param)
       case 'o'
         disp('Optimizacion')
@@ -40,7 +39,7 @@ function ajustes(p1, p2, p3, p4, p5)
       otherwise
         display('Los parámetros posibles son: o, g, r , e, p');
 
-    end %switch
+    end
   end
 
 end
