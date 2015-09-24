@@ -90,9 +90,6 @@ dist = [X dist];
 Xesfera = X(II,:);
 Xcono = X(~II,:);
 
-save('-ascii', '~/Desktop/esfera.dat', 'Xesfera');
-save('-ascii', '~/Desktop/cono.dat', 'Xcono');
-
 Z2umbral = Z2max - (popt(6))*(1 - sin(popt(7))) ; % es el umbral entre cono y esfera medida
 zce = Z2umbral - popt(6)*sin(popt(7));
 % sino poner popt(6)-R2 en todos lados
